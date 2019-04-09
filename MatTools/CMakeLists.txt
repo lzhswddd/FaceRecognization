@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 2.8)
+
+project(MatTools C CXX)
+set(BUILD_USE_64BITS on)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+
+FIND_PACKAGE(OpenCV REQUIRED)
+
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_LIST_DIR}/include
+    ${OpenCV_INCLUDE_DIRS})
+
+file(GLOB MAT_SRC${CMAKE_CURRENT_LIST_DIR}/include/*.h ${CMAKE_CURRENT_LIST_DIR}/src/*.cpp)
+set(MAT_COMPILE_CODE ${MAT_SRC})
+
+# Target
+add_library(MatTools SHARED ${MAT_COMPILE_CODE})
+TARGET_LINK_LIBRARIES(MatTools ${OpenCV_LIBS})
